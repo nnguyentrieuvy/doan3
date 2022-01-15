@@ -68,24 +68,24 @@ def index(request):
 
 
 
-# def login(request):
-#     try:
-#         if request.method == 'POST':
-#             tk = request.POST['tk']
-#             mk = request.POST['mk']
-#             hash_object = hashlib.sha1(bytes(mk, 'utf-8'))
-#             mk = hash_object.hexdigest()
-#             print(mk)
-#             d = TK(tk)
-#             if d['TaiKhoan'] == tk and d['MatKhau'] == mk:
-#                 request.session['tk'] = tk
-#                 request.session['mk'] = mk
-#                 request.session['vtro'] = d['VaiTro']
-#                 if d['VaiTro'] == 3:
-#                     return redirect('../customer/0')
-#     except MultiValueDictKeyError:
-#         return render(request, 'Home/login.html')
-#     return render(request, 'Home/login.html')
+def login(request):
+    try:
+        if request.method == 'POST':
+            tk = request.POST['tk']
+            mk = request.POST['mk']
+            hash_object = hashlib.sha1(bytes(mk, 'utf-8'))
+            mk = hash_object.hexdigest()
+            print(mk)
+            d = TK(tk)
+            if d['TaiKhoan'] == tk and d['MatKhau'] == mk:
+                request.session['tk'] = tk
+                request.session['mk'] = mk
+                request.session['vtro'] = d['VaiTro']
+                if d['VaiTro'] == 3:
+                    return redirect('../customer/0')
+    except MultiValueDictKeyError:
+        return render(request, 'Home/login.html')
+    return render(request, 'Home/login.html')
 
 def registration(request):
     return render(request, 'Home/registration.html')
@@ -359,21 +359,31 @@ def cttd(request, dd, xp):
 
 def login(request):
     print(-1)
+    sl_ve = 0
     if 'tk' in request.session and 'mk' in request.session and 'vtro' in request.session:
         print(0)
         print(request.session['tk'])
-        try:
-            d = TK(request.session['tk'])
-            if request.session['tk'] == d['TaiKhoan'] and request.session['mk'] == d['MatKhau']:
+        # try:
+        d = TK(request.session['tk'])
+        if request.session['tk'] == d['TaiKhoan'] and request.session['mk'] == d['MatKhau']:
+            try:
                 for i in request.session['cs_cart']:
                     if i['tk'] == request.session['tk']:
                         sl_ve = sum(a['SL'] for a in i['cart'])
                         break
                     else:
                         sl_ve = 0
-                return render(request, 'KH/index.html', {'sove': sl_ve, 'tk': request.session['tk']})
-        except UnboundLocalError:
-            return redirect('../../')
+            except KeyError:
+                request.session['cs_cart'] = []
+                sl_ve = 0
+            return render(request, 'KH/index.html', {'sove': sl_ve, 'tk': request.session['tk']})
+        else:
+            del request.session['tk']
+            del request.session['mk']
+            del request.session['vtro']
+            return render(request, 'Home/login.html')
+        # except UnboundLocalError:
+        #     return render(request, 'Home/login.html')
     if request.method == 'POST':
         print('hhhh')
         tk = request.POST['tk']
@@ -394,13 +404,16 @@ def login(request):
                 print("vtro la")
                 print(request.session['vtro'])
                 if d['VaiTro'] == 3:
-                    for i in request.session['cs_cart']:
-                        if i['tk'] == request.session['tk']:
-                            sl_ve = sum(a['SL'] for a in i['cart'])
-                            break
-                        else:
-                            sl_ve = 0
-                    return render(request, 'KH/index.html', {'sove': sl_ve, 'tk': request.session['tk']})
+                    try:
+                        for i in request.session['cs_cart']:
+                            if i['tk'] == request.session['tk']:
+                                sl_ve = sum(a['SL'] for a in i['cart'])
+                                break
+                            else:
+                                sl_ve = 0
+                        return render(request, 'KH/index.html', {'sove': sl_ve, 'tk': request.session['tk']})
+                    except KeyError:
+                        return redirect('../../')
                 else:
                     return redirect('../../')
         except UnboundLocalError:
@@ -421,7 +434,8 @@ def logout(request):
 def lichtrinhKH(request):
     # del request.session['cs_cart']
     # request.session['cs_cart'] = [{'MaLT': '61cbe6818b0d749f8e8d9bdb','SL': 1}]
-    print(request.session['cs_cart'])
+    # print(request.session['cs_cart'])
+    sl_ve = 0
     DVX = connection.connect_db()
     lt = DVX['LoTrinh']
     lt_ttr = lt.aggregate([

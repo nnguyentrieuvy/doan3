@@ -72,24 +72,6 @@ def index(request):
 
 
 
-def login(request):
-    try:
-        if request.method == 'POST':
-            tk = request.POST['tk']
-            mk = request.POST['mk']
-            hash_object = hashlib.sha1(bytes(mk, 'utf-8'))
-            mk = hash_object.hexdigest()
-            print(mk)
-            d = TK(tk)
-            if d['TaiKhoan'] == tk and d['MatKhau'] == mk:
-                request.session['tk'] = tk
-                request.session['mk'] = mk
-                request.session['vtro'] = d['VaiTro']
-                if d['VaiTro'] == 3:
-                    return redirect('../customer/0')
-    except MultiValueDictKeyError:
-        return render(request, 'Home/login.html')
-    return render(request, 'Home/login.html')
 
 def registration(request):
     return render(request, 'Home/registration.html')
@@ -369,7 +351,7 @@ def login(request):
         print(request.session['tk'])
         # try:
         d = TK(request.session['tk'])
-        if request.session['tk'] == d['TaiKhoan'] and request.session['mk'] == d['MatKhau']:
+        if request.session['tk'] == d['TaiKhoan'] and request.session['mk'] == d['MatKhau'] and request.session['vtro'] == 3:
             try:
                 for i in request.session['cs_cart']:
                     if i['tk'] == request.session['tk']:

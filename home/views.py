@@ -29,6 +29,10 @@ def TK(tk):
         a = d
     return a
 
+
+def login1(request):
+    return render(request, 'Home/login.html')
+
 def dangky(request):
     DVX = connection.connect_db()
     tk = DVX["TaiKhoan"]
@@ -490,6 +494,7 @@ def ttcn(request):
 def vedadat(request):
     return render(request, 'KH/vedadat.html')
 
+
 def giohang(request):
     if check_permission.check(request) == 3:
         ve = []
@@ -558,7 +563,7 @@ def giohang(request):
         return render(request, 'KH/giohang.html', {'sove': sl_ve, 'data': data, 'tk': request.session['tk']})
     else:
         check_permission.del_session(request)
-        return redirect('../../login')
+        return redirect('../../../')
 
 
 @csrf_exempt
@@ -665,73 +670,8 @@ def thanhtoan1(request):
             return redirect("../customer/cart")
     else:
         check_permission.del_session(request)
-        return redirect('../../login')
+        return redirect('../../../')
 
-@csrf_exempt
-# def thanhtoan_get(request):
-#     tongtien = 0
-#     sl = 0
-#     if request.is_ajax and request.method == 'POST':
-#         # tongtien = request.POST.get('tt')
-#         cart = request.POST.get('dt')
-#         # cart = json.loads(cart)
-#         print('----------h--------')
-#         print(cart)
-#         print('----------h--------')
-#         # mlt = []
-#         # for k in cart:
-#         #     mlt.append(ObjectId(k['MaVe']))
-#         # print('-------MaLT-------')
-#         # print(mlt)
-#         # DVX = connection.connect_db()
-#         # lt = DVX['LoTrinh']
-#         # data = lt.aggregate([
-#         #     {"$match": {
-#         #         "_id": {"$in": mlt}
-#         #     }},
-#         #     {'$lookup':
-#         #          {'from': 'Tuyen_Tram',
-#         #           'localField': 'MaTuyen',
-#         #           'foreignField': 'MaTuyen',
-#         #           'as': 'MaTuyen'}},
-#         #     {"$group": {
-#         #         "_id": "$_id",
-#         #         "TGXB": {"$first": "$TGXuatBen"},
-#         #         "TGDB": {"$first": "$TGDenBen"},
-#         #         "MaTuyen": {"$first": {"$first": "$MaTuyen.MaTuyen"}},
-#         #         "Tram": {"$first": "$MaTuyen.MaTram"},
-#         #         "TramDau": {"$first": {"$first": "$MaTuyen.MaTram"}},
-#         #         "TramCuoi": {"$last": {"$last": "$MaTuyen.MaTram"}}
-#         #     }
-#         #     },
-#         #     {'$lookup':
-#         #          {'from': 'Tuyen',
-#         #           'localField': 'MaTuyen',
-#         #           'foreignField': '_id',
-#         #           'as': 'MaTuyen'}},
-#         # ])
-#         # data = list(data)
-#         # print(data)
-#         # for i in cart:
-#         #     for k in data:
-#         #         if str(i['MaVe']) == str(k['_id']):
-#         #             i['TGXB'] = k['TGXB']
-#         #             i['TGDB'] = k['TGDB']
-#         #             i['MaTuyen'] = k['MaTuyen']
-#         #             i['Tram'] = k['Tram']
-#         #             i['TramDau'] = k['TramDau']
-#         #             i['TramCuoi'] = k['TramCuoi']
-#         # print('----------cart v2-----------')
-#         # print(cart)
-#         # # for h in cart:
-#         # #     h['MaVe'] = str(h['MaVe'])
-#         # # request.session['cs_thanhtoan'] = cart
-#         # return JsonResponse({}, status=200)
-#         # return JsonResponse({'cart': cart}, status=200)
-#     # else:
-#     #     # sl = sum(i['SL'] for i in cart)
-#     #     sl_ve = sum(i['SL'] for i in request.session['cs_cart'])
-#     #     return render(request, 'KH/thanhtoan.html', {'data': request.session['cs_thanhtoan'], 'tongtien': tongtien, 'sove': sl_ve})
 
 
 def check(request):

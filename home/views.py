@@ -1080,8 +1080,6 @@ def ticket_cancel(request):
         ve = request.POST.get('ve')
         sl = request.POST.get('sl')
         tgxb = request.POST.get('tgxb')
-        # print(tgxb)
-        dv = DVX['DatVe']
         dv_ct = DVX['DatVe_ChiTiet']
         kq = dv_ct.find_one({'MaDH': ObjectId(mdh), 'Ve': ObjectId(ve)})
         conlai = int(kq['SL']) - int(sl)

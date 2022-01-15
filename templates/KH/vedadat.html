@@ -325,10 +325,11 @@
     $(".huyve").click(function (e) {
             e.preventDefault();
             var div = $(this).parent().parent().parent().parent().parent();
+            var div1 = $(this).parent().parent().parent();
             var madh = div.find(".mdh").text();
             var ve = $(this).val();
             var sl_ve = div.find(".sl").val();
-            var tgxb = div.find(".tgxb").text() ;
+            var tgxb = div1.find(".tgxb").text() ;
             alert("Bạn có chắc muốn hủy vé?");
             // POST AJAX request
             $.ajax({

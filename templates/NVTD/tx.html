@@ -123,12 +123,12 @@ https://templatemo.com/tm-529-ramayana
 <!--                        </div>-->
                         <div class="col-md-12">
                           <fieldset>
-                            <input type="time" name="tgxb" class="form-control" placeholder="Xuất bến" required="">
+                            <input type="time" id="tgxb" name="tgxb" class="form-control" placeholder="Xuất bến" required="">
                           </fieldset>
                         </div>
                         <div class="col-md-12">
                           <fieldset>
-                            <input type="time" name="tgdb" class="form-control" placeholder="Đến bến" required="">
+                            <input type="time" id = "tgdb" name="tgdb" class="form-control" placeholder="Đến bến" required="">
                           </fieldset>
                         </div>
 <!--                        <div class="col-md-12">-->
@@ -137,7 +137,7 @@ https://templatemo.com/tm-529-ramayana
 <!--                          </fieldset>-->
 <!--                        </div>-->
                         <div class="col-md-12">
-                          <button formaction="../../route/add" type="submit" id="" class="button">Thêm</button>
+                          <button formaction="../../route/add" type="submit" id="them" class="button">Thêm</button>
                         </div>
                         <div class="col-md-12" style="padding-top: 10px;"><a style="color: {{color}};">{{m}}</a></div>
                       </div>
@@ -307,8 +307,21 @@ https://templatemo.com/tm-529-ramayana
       }
     }
     </script>
-</body>
-
+<script>
+  $("#them").click(function (){
+    var tgdb = $("#tgdb").val();
+    tgdb = 'March 13, 08 '+tgdb;
+    var tgxb = $("#tgxb").val();
+    tgxb = 'March 13, 08 '+tgxb;
+    var db = new Date(tgdb);
+    var xb = new Date(tgxb);
+    var time = db.getHours() - xb.getHours();
+    if (time < 1) {
+       alert('Thời gian xuất bến phải lớn hơn thời gian xuất bến ít nhất 1 giờ!');
+       $("#tgdb").val("");
+    }
+  });
+</script>
 
   </body>
 

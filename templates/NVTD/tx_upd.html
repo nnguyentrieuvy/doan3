@@ -159,7 +159,7 @@ https://templatemo.com/tm-529-ramayana
                         </div>
                         <div class="col-md-12">
                           <fieldset>
-                            <input type="text" name="vecosan" class="form-control" placeholder="Vé có sẵn" value="{{lt_t.0.SoVe}}" required="">
+                            <input type="text" id = "sove" name="vecosan" class="form-control" placeholder="Vé có sẵn" value="{{lt_t.0.SoVe}}" required="">
                           </fieldset>
                         </div>
                         <div class="col-md-12">
@@ -353,6 +353,21 @@ https://templatemo.com/tm-529-ramayana
        alert('Thời gian xuất bến phải lớn hơn thời gian xuất bến ít nhất 1 giờ!');
        $("#tgdb").val("");
     }
+  });
+
+  $("#sove").change(function (){
+    var sove = $(this).val();
+    if (isNaN(sove)) {
+       alert('Số vé không hợp lệ!');
+       $(this).val("");
+    }
+    else {
+       if (sove > 20) {
+       alert('Số lượng vé không được quá 20!');
+       $(this).val("");
+    }
+    }
+
   });
 </script>
 </body>

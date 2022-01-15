@@ -1,0 +1,310 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- mobile metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<!-- site metas -->
+<title>Lịch trình</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- bootstrap css -->
+<link rel="stylesheet" type="text/css" href="{% static 'uloax/css/bootstrap.min.css' %}">
+<!-- style css -->
+<link rel="stylesheet" type="text/css" href="{% static 'uloax/css/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'uloax/css/style1.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'uloax/css/searching.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'uloax/css/lichtrinh.css' %}">
+<!-- Fontawesome -->
+<link rel="stylesheet" href="{% static 'uloax/css/fontawesome-all.min.css' %}">
+<!-- Responsive-->
+<link rel="stylesheet" href="{% static 'uloax/css/responsive.css' %}">
+<!-- fevicon -->
+<link rel="icon" href="{% static 'uloax/images/fevicon.png' %}" type="image/gif" />
+<!-- Scrollbar Custom CSS -->
+<link rel="stylesheet" href="{% static 'uloax/css/jquery.mCustomScrollbar.min.css' %}">
+<!-- Tweaks for older IEs-->
+<!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">-->
+<!-- owl stylesheets --> 
+<link rel="stylesheet" href="{% static 'uloax/css/owl.carousel.min.css' %}">
+<!--<link rel="stylesheet" href="{% static 'uloax/css/owl.theme.default.min.css' %}">-->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">-->
+
+
+</head>
+<body>
+	<!--header section start -->
+    <div id="index.html" class="header_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="logo"><a style="font-size: 30px;" href="../"><img style="width: 30%;" src="{% static 'uloax/images/bus-icon.png' %}"><b style="font-family: Helvetica; color: #fff"> BUS </b></a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-9">
+                    <div class="menu_text">
+                        <ul>
+                            <li><a href="../../../">Trang chủ</a></li>
+                            <li><a class="current" href="#">Lịch trình</a></li>
+                            <li><a href="../../../bus_stop">Bến xe</a></li>
+                            <li><a href="#">Hướng dẫn đặt vé</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="../../../customer/cart"><img style="width: 23px; height: 23px;" src="{% static 'uloax/images/cart-icon.png' %}"></a></li>
+                            <form>
+                            <div class="dn_dk btn-group position-absolute top-0 end-0" style="padding-top: 10px;" role="group" aria-label="Basic example">
+                                         <button type="submit" formaction="../../../login" class="btn btn-outline-warning">Đăng nhập</button>
+                                         <button type="submit" formaction="../../../registration" class="btn btn-outline-warning">Đăng ký</button>
+                            </div>
+                            </form>
+                            <div id="myNav" class="overlay">
+                               <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                <div class="overlay-content">
+                                   <div class="TK">
+                                      <a id="showHome" style="color: #fff" onclick="showHome()" >
+                                         <i style="padding-right: 10px;" href="#" class="fa fa-home"></i>Trang chủ
+                                      </a>
+                                      <div>
+                                        <ul aria-labelledby="dropdownMenuButton1">
+                                            <li class="showH"><a href="#">Lịch trình</a></li>
+                                            <li class="showH"><a href="../../../bus_stop">Bến xe</a></li>
+                                            <li class="showH"><a href="../../customer/cart">Giỏ hàng</a></li>
+                                            <li class="showH"><a href="#">Hướng dẫn đặt vé</a></li>
+                                            <li class="showH" style="padding-bottom: 20px; border-bottom: 1px solid;"><a href="#">Liên hệ</a></li>
+                                        </ul>
+                                      </div>
+                                       <a href="../../../registration" style="color: #fff">
+                                         <i style="padding-right: 10px;" class="fa fa-edit"></i> Đăng ký
+                                       </a>
+                                       <a href="../../../login" style="color: #fff">
+                                         <i style="padding-right: 10px;" class="fa fa-user"></i> Đăng nhập
+                                       </a>
+                                   </div>
+                               </div>
+                            </div>
+                            <span  style="font-size:33px;cursor:pointer; color: #ffffff;" onclick="openNav()"><img style="width: 20px;" src="{% static 'uloax/images/toggle-menu.png' %}" class="toggle_menu"></span>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header section end -->
+    <!-- search section start -->
+    <div class="search">
+      <div class="container">
+          <form id="SearchingForm" method="get">
+              <div class="SearchItem">
+                  <label>Bến xuất phát</label>
+                  <input type="text" name= "bxp" placeholder= 'Bến xe Cần Thơ' style="width:100%; float:left; line-height:40px; font-size:14px; text-align:center;"/>
+              </div>
+              <div class="SearchItem">
+                  <label>Bến đến</label>
+                  <input type="text" name= "bd" placeholder= 'Bến xe Ô Môn' style="width:100%; float:left; line-height:40px; font-size:14px; text-align:center;"/>
+              </div>
+              <div class="SearchItem">
+                  <label>&nbsp;</label>
+                  <input type="submit" formaction="../../bus_route/search" value="TÌM CHUYẾN">
+              </div>
+          </form>
+      </div>
+    </div>
+    <!-- search section end -->
+
+    <!-- breadcrumb start -->
+    <div class="container">
+        <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="#">
+                    <i style="color: blue;" class="feather icon-home"></i>
+                </a>
+            </li>
+            <li class="breadcrumb-item active">
+                Lịch trình
+            </li>
+        </ol>
+    </nav>
+    </div>
+    <!-- breadcrumb start -->
+
+    <!-- content start -->
+    <div class="content" style="padding: 20px;">
+        <div class="container">
+           <div class="card Recent-Users" style="border: 1px solid rgba(0,0,0,.125);">
+            <div class="card-header">
+                <h5>Lịch trình các tuyến xe</h5>
+            </div>
+            <div class="card-block px-0 py-3">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                           <tr>
+                               <th> Điểm xuất phát </th>
+                               <th> Điểm đến </th>
+                               <th> Chi tiết </th>
+                               <th> Khởi hành </th>
+                               <th> Đến bến </th>
+                               <th> Có sẵn (vé) </th>
+                               <th> Giá vé (VND) </th>
+                               <th></th>
+                           </tr>
+                           {% for k in data %}
+                           <tr class="unread">
+                               <td>
+                                   <h6 class="mb-1">{{k.TramDau.TenDuong}}</h6>
+                               </td>
+                               <td>
+                                   <h6 class="mb-1">{{k.TramCuoi.TenDuong}}</h6>
+                               </td>
+                               <td style="white-space: initial;">
+                                   <h6 class="mb-1">
+                                   {% for tr in k.Tram %}
+                                      - {{tr.TenDuong}}
+                                   {% endfor %} -
+                                   </h6>
+                               </td>
+                               <td>
+                                   <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{k.TGXB}}</h6>
+                               </td>
+                               <td>
+                                   <h6 class="text-muted"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>{{k.TGDB}}</h6>
+                               </td>
+                               <td>
+                                   <h6 style="text-align: center;">{{k.SoVe}}</h6>
+                               </td>
+                               <td>
+                                   <h6>{{k.MaTuyen.0.GiaVe}}</h6>
+                               </td>
+                               <td><a href="../../../customer/cart" class="label theme-bg2 text-white f-12"><i class="fas fa-shopping-cart"></i></a></td>
+                           </tr>
+                           {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+<!--           <a style="color: #000; "><b>Lộ trình chi tiết:</b> <i class="Extra-Text">Bến xe buýt Cần Thơ – Đại Lộ Hòa Bình – đường Nguyễn Trãi – đường Cách Mạng Tháng Tám – đường Lê Hồng Phong – quốc lộ 91 – bến xe tàu Ô Môn</i></a>-->
+        </div>
+    </div>
+    <!-- content end -->
+  <!-- section footer start -->
+    <div class="section_footer ">
+      <div class="container"> 
+          <div class="footer_section_2">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                  <h2 class="account_text">Địa chỉ</h2>
+                  <p class="ipsum_text">Tòa nhà số 01ABC, Nguyễn Trãi, TP Cần Thơ</p>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                  <h2 class="account_text">Liên kết</h2>
+                  <div class="image-icon"><img src="{% static 'uloax/images/bulit-icon.png' %}"><span class="fb_text"><a href="#">Trang chủ</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/bulit-icon.png' %}"><span class="fb_text"><a href="#">Lịch trình</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/bulit-icon.png' %}"><span class="fb_text"><a href="#">Bến xe</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/bulit-icon.png' %}"><span class="fb_text"><a href="#">Hướng dẫn đặt vé</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/bulit-icon.png' %}"><span class="fb_text"><a href="#">Liên hệ</a></span></div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                <h2 class="account_text">Liên hệ</h2>
+                <div class="image-icon"><img src="{% static 'uloax/images/fb-icon.png' %}"><span class="fb_text"><a href="#">Facebook</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/twitter-icon.png' %}"><span class="fb_text"><a href="#">Twitter</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/in-icon.png' %}"><span class="fb_text"><a href="#">Linkedin</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/youtube-icon.png' %}"><span class="fb_text"><a href="#">Youtube</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/instagram-icon.png' %}"><span class="fb_text"><a href="#">Instagram</a></span></div>
+                </div>
+          <div class="col-sm-6 col-md-6 col-lg-3">
+            <h2 class="adderess_text">Newsletter</h2>
+            <input type="" class="email_text" placeholder="Enter Your Email" name="Enter Your Email">
+            <button class="subscribr_bt">SUBSCRIBE</button>
+          </div>
+          </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  <!-- section footer end -->
+  <!-- copyright section start -->
+  <div class="copyright_section">
+    <div class="container">
+      <p class="copyright">2019 All Rights Reserved. <a href="https://html.design">Free html  Templates</a></p>
+    </div>
+  </div>
+
+    <!-- Javascript files-->
+    <script src="{% static 'uloax/js/jquery.min.js' %}"></script>
+    <script src="{% static 'uloax/js/popper.min.js' %}"></script>
+    <script src="{% static 'uloax/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'uloax/js/jquery-3.0.0.min.js' %}"></script>
+    <script src="{% static 'uloax/js/plugin.js' %}"></script>
+    <!-- sidebar -->
+    <script src="{% static 'uloax/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'uloax/js/custom.js' %}"></script>
+    <!-- javascript --> 
+<!--    <script src="{% static 'uloax/js/owl.carousel.js' %}"></script>-->
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    $(".fancybox").fancybox({
+    openEffect: "none",
+    closeEffect: "none"
+    });
+       
+    $(".zoom").hover(function(){
+         
+    $(this).addClass('transition');
+    }, function(){
+         
+    $(this).removeClass('transition');
+    });
+    });
+    </script> 
+    <script>
+    function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+    }
+
+    function closeNav() {
+   document.getElementById("myNav").style.width = "0%";
+   }
+   function showKH() {
+        x = document.querySelectorAll(".showKH");
+        ul = document.getElementById("showKH");
+        var ds = x[0].style.display;
+        if (ds == "none") {
+           ul.classList.add("open");
+           for (i = 0; i < x.length; i++) {
+           x[i].style.display = "block";
+            }
+        } else {
+           ul.classList.remove("open");
+           for (i = 0; i < x.length; i++) {
+           x[i].style.display = "none";
+            }
+        }
+   }
+   function showHome() {
+        x = document.querySelectorAll(".showH");
+        ul = document.getElementById("showHome");
+        var ds = x[0].style.display;
+        if (ds == "none") {
+           ul.classList.add("open");
+           for (i = 0; i < x.length; i++) {
+           x[i].style.display = "block";
+            }
+        } else {
+           ul.classList.remove("open");
+           for (i = 0; i < x.length; i++) {
+           x[i].style.display = "none";
+            }
+        }
+   }
+</script>   
+</body>
+</html>

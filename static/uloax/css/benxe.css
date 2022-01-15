@@ -1,0 +1,17 @@
+.ticket {
+   width:29%;
+   margin:0px 0px 2% 4%;
+   padding:0;
+   float: left;
+   list-style: none;
+}
+
+.noidungtin {
+   float: left;
+   color: #000;
+   width: 100%;
+   text-align: left;
+   line-height: 25px;
+   padding-left: 2%;
+   padding-right: 2%;
+}

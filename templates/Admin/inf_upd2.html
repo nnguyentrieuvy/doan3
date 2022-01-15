@@ -1,0 +1,292 @@
+{% load static %}
+{% load filter %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <title>Ramayana - Free Bootstrap 4 CSS Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+<!--
+Ramayana CSS Template
+https://templatemo.com/tm-529-ramayana
+-->
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/shortcodes.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700">
+
+
+  </head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+      <!-- Main -->
+        <div id="main">
+          <div class="inner">
+
+            <!-- Header -->
+            <header id="header" style="margin: -100px -100px 50px -100px;">
+              <div class="logo">
+                <div class="btn-group mb-2 mr-2">
+                  <a style="font-size: 15px;"> Xin chào Admin! </a>
+                </div>
+              </div>
+            </header>
+
+            <!-- Breadcrumb -->
+            
+            <!-- Tables -->
+            <section class="tables">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="section-heading">
+                      <h2> Danh sách {{title}}</h2>
+                    </div>
+                    <div class="default-table table-wrapper-scroll-y my-custom-scrollbar">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Mã nhân viên</th>
+                            <th>Họ tên</th>
+                            <th>Giới tính</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for k in dt %}
+                            <tr>
+                              <td>{{ k.NhanVien.0|mongo_id}}</td>
+                              <td>{{k.NhanVien.0.HoTen}}</td>
+                              <td>{% if k.NhanVien.0.GioiTinh == 1 %} Nam {% elif k.NhanVien.0.GioiTinh == 0 %} Nữ {% endif %}</td>
+                              <td><a href="{{k.VaiTro}}/mnv/{{ k.NhanVien.0|mongo_id}}#chitiet">Chi tiết</a></td>
+                            </tr>
+                        {% endfor %}
+                        <!---->
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <a href="../nv/{{vtr}}/themnv"><button type="submit" class="button">Thêm nhân viên mới</button></a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Thông tin nhân viên -->
+            <section class="forms">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="section-heading">
+                      <h2 id="chitiet">Thông tin nhân viên</h2>
+                    </div>
+                    <form id="contact1" action="" method="POST">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="col-md-6">
+                          <fieldset>
+                            <input name="mnv" type="text" class="form-control" id="name1" placeholder="Mã Nhân Viên" required="" disabled>
+                          </fieldset>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="radio-item">
+                              <input name="gt" type="radio" id="radio_nam2" value="nam" checked>
+                              <label for="radio_nam2">Nam</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="radio-item">
+                              <input name="gt" type="radio" id="radio_nu2" value="nu">
+                              <label for="radio_nu2">Nữ</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                          <select name="cv" id="category1">
+                            <option value="Newest" selected>---Chọn chức vụ---</option>
+                            <option value="Featured" disabled>Nhân viên quản lý tuyến đường</option>
+                            <option value="Newest">Nhân viên soát vé</option>
+                          </select>
+                        </div>
+                        <div class="col-md-12">
+                          <fieldset>
+                            <input type="text" class="form-control" id="hoten1" name = 'hoten' placeholder="Họ tên" required="">
+                          </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                          <fieldset>
+                            <input type="date" class="form-control" id="NS1" name = "ns" required="">
+                          </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                          <fieldset>
+                            <input type="text" class="form-control" id="diachi1" name = 'dc' placeholder="Địa chỉ" required="">
+                          </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                          <fieldset>
+                            <input type="text" class="form-control" id="sdt" name = 'sdt' placeholder="Số điện thoại" required="">
+                          </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                          <fieldset>
+                            <input type="text" class="form-control" id="Email1" name="email" placeholder="Email" required="">
+                          </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                          <button type="submit" formaction="#" formmethod="get" id="form-submit1" class="button">Cập nhật</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+
+      <!-- Sidebar -->
+        <div id="sidebar">
+
+          <div class="inner">
+
+            <!-- Search Box -->
+            <section id="search" class="alt">
+              <img src="{% static 'assets/images/bus.png' %}" style="width: 50%; height: 100%; padding-left: 60px;" alt="">
+            </section>
+              
+            <!-- Menu -->
+           <nav id="menu">
+              <ul>
+                <li>
+                  <span class="opener">Nhân viên tuyến đường</span>
+                  <ul>
+                    <li><a href="1/themnv"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-plus"></i>  Thêm nhân viên mới </a></li>
+                    <li><a href="1"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-edit"></i>  Cập nhật thông tin nhân viên </a></li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="opener active">Nhân viên soát vé</span>
+                  <ul>
+                    <li><a href="../../nv/2/themnv"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-plus"></i>  Thêm nhân viên mới </a></li>
+                    <li><a href="2" style="color: #535ba0;"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-edit"></i>  Cập nhật thông tin nhân viên </a></li>
+                  </ul>
+                </li>
+                <li><a href="../../../usr/changepassword">Thay đổi mật khẩu</a></li>
+                <li><a href="../../fhwflhwdklfhwqplfijepoqf9u4038586885889882wdnadakdD872182CMMFKFKFOKFLASIUOVBJHFJ">Đăng xuất</a></li>
+              </ul>
+            </nav>
+
+            <!-- Featured Posts -->
+            <div class="featured-posts">
+              <div class="heading">
+                <h2>Featured Posts</h2>
+              </div>
+              <div class="owl-carousel owl-theme">
+                <a href="#">
+                  <div class="featured-item">
+                    <img src="{% static 'assets/images/featured_post_01.jpg' %}" alt="featured one">
+                    <p>Aliquam egestas convallis eros sed gravida. Curabitur consequat sit.</p>
+                  </div>
+                </a>
+                <a href="#">
+                  <div class="featured-item">
+                    <img src="{% static 'assets/images/featured_post_01.jpg' %}" alt="featured two">
+                    <p>Donec a scelerisque massa. Aliquam non iaculis quam. Duis arcu turpis.</p>
+                  </div>
+                </a>
+                <a href="#">
+                  <div class="featured-item">
+                    <img src="{% static 'assets/images/featured_post_01.jpg' %}" alt="featured three">
+                    <p>Suspendisse ac convallis urna, vitae luctus ante. Donec sit amet.</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <footer id="footer">
+              <p class="copyright">Copyright &copy; 2019 Company Name
+              <br>Designed by <a rel="nofollow" href="https://www.facebook.com/templatemo">Template Mo</a></p>
+            </footer>
+            
+          </div>
+        </div>
+
+    </div>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'assets/js/browser.min.js' %}"></script>
+    <script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/transition.js' %}"></script>
+    <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+<script>
+  $("#NS1").change(function (){
+    var ns = $(this).val();
+    var dt = new Date(ns);
+    var now = new Date();
+    var time = now.getYear() - dt.getYear();
+    if (time <= 18) {
+       alert('Nhân viên phải trên 18 tuổi');
+       $(this).val("");
+    }
+  });
+
+  $("#mnv").change(function () {
+        var mnv = $("#mnv").val();
+        $.ajax({
+               type: 'POST',
+               url: "../../checkTK",
+               data: {
+                  'tk': mnv
+               },
+               success: function (response) {
+               if (response["kq"] == 1){
+                    $("#mnv").val("");
+                    alert('Tài khoản đã tồn tại!');
+               }
+               },
+               error: function (response) {
+                  console.log(response)
+               }
+        });
+    });
+
+  $("#sdt").change(function (){
+    var sdt = $(this).val();
+    if (isNaN(sdt)) {
+       alert('Số điện thoại không hợp lê!');
+       $(this).val("");
+    }
+  });
+</script>
+</body>
+
+
+  </body>
+
+</html>

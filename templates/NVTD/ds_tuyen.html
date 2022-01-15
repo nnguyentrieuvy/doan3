@@ -1,0 +1,325 @@
+{% load static %}
+{% load filter %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <title>Ramayana - Free Bootstrap 4 CSS Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+<!--
+Ramayana CSS Template
+https://templatemo.com/tm-529-ramayana
+-->
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/shortcodes.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700">
+
+
+  </head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+      <!-- Main -->
+        <div id="main">
+          <div class="inner">
+
+            <!-- Header -->
+            <header id="header" style="margin: -100px -100px 50px -100px;">
+              <div class="logo">
+                <div class="btn-group mb-2 mr-2">
+                  <a style="font-size: 15px;"> Xin chào! </a>
+                </div>
+              </div>
+            </header>
+
+            <!-- Breadcrumb -->
+
+            <!-- Tables -->
+            <section class="tables">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="section-heading">
+                      <h2 id> Danh sách tuyến xe </h2>
+                    </div>
+                    <div class="default-table table-wrapper-scroll-y my-custom-scrollbar">
+                      <table>
+                        <thead>
+                          <tr>
+<!--                            <th>Mã tuyến</th>-->
+                            <th>Trạm đầu</th>
+                            <th>Trạm cuối</th>
+                            <th>Giá vé</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for d in data %}
+                            <tr>
+<!--                              <td>{{d.MaTuyen.0.MaTuyen}}</td>-->
+                              <td>{{d.MaTuyen.0.MaTram.TenDuong}}</td>
+                                  {% for i in d.MaTuyen %}
+                                     {% if i.tt == d.MaTuyen|length %} <td> {{ i.MaTram.TenDuong }} </td>{% endif %}
+                                  {% endfor %}
+                              <td>{{d.GiaVe}}</td>
+                              <td><a href="../../bus_route/{{d.MaTuyen.0.MaTuyen}}#chitiet">Chi tiết</a></td>
+                              <td><a href="../../route/{{d.MaTuyen.0.MaTuyen}}/information">Xem lộ trình</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+<!--                  <div class="col-md-12">-->
+<!--                    <a href=""><button type="submit" class="button">Thêm tuyến đường</button></a>-->
+<!--                  </div>-->
+                </div>
+              </div>
+            </section>
+
+            <!-- Chi tiết lộ trình-->
+            <section class="forms" style="border-bottom: none;">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="section-heading">
+                      <h2 id="chitiet">Chi tiết tuyến xe</h2>
+                    </div>
+                    <form id="contact" action="" method="GET">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="col-md-12">
+                          <select name="1">
+                                {% for tuyen in ds_tuyen %}
+                                   <option name="" value="" {% if dt_ct.0.MaTuyen.0.MaTuyen == tuyen|mongo_id %} selected {% endif %} disabled>Mã tuyến: {{tuyen|mongo_id}}</option>
+                                {% endfor %}
+                          </select>
+                        </div>
+                        <div class="col-md-2">
+                          <fieldset>
+                            <input type="text" name="t1" class="form-control" placeholder="Tuyến" required="" disabled>
+                          </fieldset>
+                        </div>
+                        <div class="col-md-9" id="dstd">
+                        {% for i in dt_ct.0.MaTuyen %}
+                          <div class="col-md-4" style="float: left;">
+                            <select id="sel" name="1" required="required" disabled>
+                              <option class="dsd" name="" value="0">--Chọn đường số {{i.tt}}-</option>
+                              {% for d in ds_duong %}
+                                 <option class="dsd" value="{{d.TenDuong}}" {% if d.TenDuong == i.MaTram.TenDuong %} selected {% endif %}>{{d.TenDuong}}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        {% endfor %}
+                        </div>
+                        <input type="text" id ="laygt" name="laygt" value="1" style="display: none;" class="form-control" placeholder="">
+<!--                        ----------Nut them duong------->
+<!--                        <div class="col-md-1">-->
+<!--                          <button formaction="" type="button" class="button" onclick="myFunction()"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-plus"></i></button>-->
+<!--                        </div>-->
+                        <div class="col-md-12">
+                          <fieldset>
+                            <input type="text" name="giave" class="form-control" placeholder="Giá vé" value="{{dt_ct.0.GiaVe}}" required="">
+                          </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                          <button formaction="../../bus_route/{{dt_ct.0.MaTuyen.0.MaTuyen}}/update" type="submit" id="" class="button">Cập nhật</button>
+                        </div>
+                        <div class="col-md-12" style="padding-top: 10px;"><a style="color: {{color}};">{{m}}</a></div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+      <!-- Sidebar -->
+        <div id="sidebar">
+
+          <div class="inner">
+
+            <!-- Search Box -->
+            <section id="search" class="alt">
+              <img src="{% static 'assets/images/bus.png' %}" style="width: 50%; height: 100%; padding-left: 60px;" alt="">
+            </section>
+              
+            <!-- Menu -->
+           <nav id="menu">
+              <ul>
+                <li>
+                  <span class="opener">Thông tin cá nhân</span>
+                  <ul>
+                    <li><a href="../../usr/information"><i style="font-family: 'FontAwesome'; font-style: normal;" class="fa-edit"></i>  Cập nhật thông tin </a></li>
+                    <li><a href="../../usr/changepassword"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-key"></i>  Thay đổi mật khẩu </a></li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="opener">Tuyến đường</span>
+                  <ul>
+                    <li><a href="../../city_route"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-plus"></i>  Thêm tuyến mới </a></li>
+                    <li><a href="../../city_route/information"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-edit"></i>  Cập nhật tuyến đường </a></li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="opener active">Lộ tình</span>
+                  <ul>
+                    <li><a href="../../bus_routes" style="color: #535ba0;"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-plus"></i>  Danh sách tuyến xe </a></li>
+                    <li><a href="../../route"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-plus"></i>  Thêm lộ trình mới </a></li>
+                    <li><a href="../../route/information"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-edit"></i>  Cập nhật lộ trình</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="opener">Xe buýt</span>
+                  <ul>
+                    <li><a href="../../nvtd/bus"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-plus"></i>  Thêm mới </a></li>
+                    <li><a href="../../nvtd/bus_inf"><i style="font-family: 'FontAwesome'; font-style: normal" class="fa-edit"></i>  Cập nhật </a></li>
+                  </ul>
+                </li>
+                <li><a href="../../fhwflhwdklfhwqplfijepoqf9u4038586885889882wdnadakdD872182CMMFKFKFOKFLASIUOVBJHFJ">Đăng xuất</a></li>
+              </ul>
+            </nav>
+
+            <!-- Featured Posts -->
+            <div class="featured-posts">
+              <div class="heading">
+                <h2>Featured Posts</h2>
+              </div>
+              <div class="owl-carousel owl-theme">
+                <a href="#">
+                  <div class="featured-item">
+                    <img src="{% static 'assets/images/featured_post_01.jpg' %}" alt="featured one">
+                    <p>Aliquam egestas convallis eros sed gravida. Curabitur consequat sit.</p>
+                  </div>
+                </a>
+                <a href="#">
+                  <div class="featured-item">
+                    <img src="{% static 'assets/images/featured_post_01.jpg' %}" alt="featured two">
+                    <p>Donec a scelerisque massa. Aliquam non iaculis quam. Duis arcu turpis.</p>
+                  </div>
+                </a>
+                <a href="#">
+                  <div class="featured-item">
+                    <img src="{% static 'assets/images/featured_post_01.jpg' %}" alt="featured three">
+                    <p>Suspendisse ac convallis urna, vitae luctus ante. Donec sit amet.</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <footer id="footer">
+              <p class="copyright">Copyright &copy; 2019 Company Name
+              <br>Designed by <a rel="nofollow" href="https://www.facebook.com/templatemo">Template Mo</a></p>
+            </footer>
+            
+          </div>
+        </div>
+
+    </div>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'assets/js/browser.min.js' %}"></script>
+    <script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/transition.js' %}"></script>
+    <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <script>
+
+
+    function myFunction() {
+      var node = document.getElementById('dstd');
+      var div = document.createElement('div');
+      div.classList.add('col-md-4');
+      div.style.float = 'left';
+
+      var tong = node.getElementsByTagName('div').length;
+      var stt = tong + 1;
+
+      if (tong <=5){
+         var select3 = document.createElement("select");
+
+         let select = document.getElementById("sel");
+         let opt = select.querySelectorAll(".dsd");
+         var h = select.getElementsByTagName("option").length;
+         let dd = document.getElementById("dd");
+         let laygt = document.getElementById("laygt");
+         laygt.value = tong;
+
+         for (var i = 0; i<=h-1; i++){
+           var o = document.createElement("option");
+
+           o.text = opt[i].text;
+           o.className = "dsd";
+           if (i==0){
+             select3.setAttribute("name",stt);
+             o.text = '--Chọn đường số '+ stt + '--';
+<!--             o.setAttribute("value",stt);-->
+             stt = stt + 1;
+           }
+           select3.appendChild(o)
+         }
+         div.appendChild(select3);
+         node.appendChild(div);
+
+      } else {
+         alert('Số lượng đường đã vượt quá quy định!')
+      }
+
+
+
+
+
+
+
+
+
+<!--      loi-->
+<!--let select3 = document.createElement("select");-->
+<!--      for (let i = 0; i<=3; i++){-->
+<!--        let opt = document.getElementsByTagName("option");-->
+<!--        select3.appendChild(opt[i]);-->
+
+<!--      }-->
+
+
+
+
+
+
+
+
+
+
+
+    }
+    </script>
+</body>
+
+
+  </body>
+
+</html>

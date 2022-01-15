@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Đăng ký</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'login/css/style.css' %}" />
+        <!--<link rel="stylesheet" href="{% static 'uloax/css/owl.theme.default.min.css' %}">-->
+    </head>
+    <body>
+        <div class="container clearfix">
+            <div class="form registration">
+                <a class="logo" href="">
+                    <img style="width: 50%;" src="{% static 'uloax/images/bus-icon.png' %}" alt="Logo" />
+                </a>
+                <form>
+                    {% csrf_token %}
+                    <p>
+                        <label>Tài khoản<span>*</span></label>
+                        <input id='tk' name="TK" type="text" required>
+                    </p>
+                    <p>
+                        <label>Mật khẩu<span>*</span></label>
+                        <input name="MK" type="password" required>
+                    </p>
+                    <p>
+                        <label>Xác nhận mật khẩu<span>*</span></label>
+                        <input name="xnmk"  type="password" required>
+                    </p>
+                    <p>
+                        <label>
+                            <a href="../../../login">Đăng nhập</a>
+                        </label>
+                        <input type="submit" id="dk" formmethod="post" formaction="../../Home/index" value="Đăng ký" />
+                    </p>
+                </form>
+            </div>
+        </div>
+    <!-- Javascript files-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+    $("#tk").change(function () {
+        var tk = $("#tk").val();
+        $.ajax({
+               type: 'POST',
+               url: "../../checkTK",
+               data: {
+                  'tk': tk
+               },
+               success: function (response) {
+               if (response["kq"] == 1){
+                    $("#tk").val("");
+                    alert('Tài khoản đã tồn tại!');
+               }
+               },
+               error: function (response) {
+                  console.log(response)
+               }
+        });
+    });
+    </script>
+    </body>
+</html>

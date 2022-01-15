@@ -1,0 +1,195 @@
+                   {% load static %}
+                   {% load filter %}
+                   {% for k in data %}
+                      <tr class="h">
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input cb checkBoxClass mlt" type="checkbox" id="flexCheckDefault" name="mlt" value="{{k|mongo_id}}">
+                            </div>
+                        </td>
+                        <td data-th="Product" style="white-space: normal;">
+                            <div class="row">
+                                <div class="col-md-3 text-left">
+                                    <img src="{% static 'uloax/images/ticket.jpg' %}" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                </div>
+                                <div class="col-md-9 text-left mt-sm-2">
+                                    <h4>{{k.TramDau.TenDuong}} - {{k.TramCuoi.TenDuong}}</h4>
+                                    <p class="font-weight-light">{{k.TGXB}} - {{k.TGDB}}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="LoTrinh" style="white-space: normal;">
+                            {% for tr in k.Tram %}
+                            - {{tr.TenDuong}}
+                            {% endfor %} -
+                        </td>
+                        <td data-th="Price" class="gia" name="gia">{{k.MaTuyen.0.GiaVe}}</td>
+                        <td data-th="Quantity">
+                            <input type="number" class="form-control form-control-lg text-center sl" name="soluong" value="{{k.SL}}">
+                        </td>
+                        <td class="actions" data-th="">
+                            <div class="text-right">
+<!--                                <button class="btn btn-white border-secondary bg-white btn-md mb-2">-->
+<!--                                    <i class="fas fa-sync"></i>-->
+<!--                                </button>-->
+                                <button type="submit" class="delete" value="{{k|mongo_id}}" class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                   {% endfor %}
+
+<script src="{% static 'uloax/js/jquery.min.js' %}"></script>
+    <script src="{% static 'uloax/js/popper.min.js' %}"></script>
+    <script src="{% static 'uloax/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'uloax/js/jquery-3.0.0.min.js' %}"></script>
+    <script src="{% static 'uloax/js/plugin.js' %}"></script>
+    <!-- sidebar -->
+    <script src="{% static 'uloax/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'uloax/js/custom.js' %}"></script>
+    <!-- javascript -->
+<!--    <script src="{% static 'uloax/js/owl.carousel.js' %}"></script>-->
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    $(".fancybox").fancybox({
+    openEffect: "none",
+    closeEffect: "none"
+    });
+
+    $(".zoom").hover(function(){
+
+    $(this).addClass('transition');
+    }, function(){
+
+    $(this).removeClass('transition');
+    });
+    });
+    </script>
+    <script>
+    function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+    }
+
+    function closeNav() {
+   document.getElementById("myNav").style.width = "0%";
+   }
+
+   function showKH() {
+        x = document.querySelectorAll(".showKH");
+        ul = document.getElementById("showKH");
+        var ds = x[0].style.display;
+        if (ds == "none") {
+           ul.classList.add("open");
+           for (i = 0; i < x.length; i++) {
+           x[i].style.display = "block";
+            }
+        } else {
+           ul.classList.remove("open");
+           for (i = 0; i < x.length; i++) {
+           x[i].style.display = "none";
+            }
+        }
+   }
+   function showHome() {
+        x = document.querySelectorAll(".showH");
+        ul = document.getElementById("showHome");
+        var ds = x[0].style.display;
+        if (ds == "none") {
+           ul.classList.add("open");
+           for (i = 0; i < x.length; i++) {
+           x[i].style.display = "block";
+            }
+        } else {
+           ul.classList.remove("open");
+           for (i = 0; i < x.length; i++) {
+           x[i].style.display = "none";
+            }
+        }
+   }
+</script>
+<script>
+        let data = [];
+        var $t = $("table > tbody > tr");
+        var demo = $("#lblCartCount");
+        var sv = $("#sv");
+        var tong = $("#tong");
+        $(".delete").click(function (e) {
+            let mlt = $(this).val();
+            e.preventDefault();
+            // POST AJAX request
+            $.ajax({
+               type: 'POST',
+               url: "delete_item/" + mlt,
+               success: function (response) {
+                  $("tbody").load("get_tb");
+                    demo.html(response["sove"])
+                    sv.html(response["sove"])
+               },
+               error: function (response) {
+                  console.log(response)
+               }
+            }).done(function(response) {
+
+            });
+        });
+        $(".sl").change(function () {
+              tr = $(this).parent().parent();
+              mlt = tr.find(".mlt");
+              let lt = mlt.val();
+              let sl = $(this).val();
+              var tr1 = $(this).parent().parent();
+              var $checkbox = tr1.find('.mlt');
+              var $td = tr1.find('td');
+              let sl_cb = $(this).val();
+              var gia = tr1.find('.gia').text();
+              if ($checkbox.is(':checked'))
+              {
+                 var tongtien = 0;
+                 tongtien = tongtien + gia*sl_cb;
+                 tong.html(tongtien);
+              }
+
+              $.ajax({
+                 url: "update_cart",
+                 method: 'POST',
+                 data : {
+                    'mlt': lt,
+                    'sl': sl
+                 },
+                 success: function (response) {
+                     sove = response['sove'];
+                     $(".slve").html(sove);
+<!--                     location.reload();-->
+                     $("tbody").load("get_tb");
+                 },
+                 error: function (response) {
+                 console.log(response);
+                 }
+            });
+        });
+
+
+
+    </script>
+    <script>
+var tongtien = 0;
+function notify() {
+      var tr = $(this).parent().parent().parent();
+      var td = tr.find('td');
+      var sl = td.find('.sl').val();
+      var gia = tr.find('.gia').text();
+      var tong = $("#tong");
+      if ($(this).is(':checked'))
+      {
+         tongtien = tongtien + gia*sl;
+         tong.html(tongtien);
+      }
+      else {
+         tongtien = tongtien - gia*sl;
+         tong.html(tongtien);
+      }
+    };
+</script>

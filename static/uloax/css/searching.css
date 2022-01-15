@@ -1,0 +1,91 @@
+.search {
+    font-family: 'Roboto Condensed', sans-serif;
+    float: left;
+    position: relative;
+    padding: 12px 0 11px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #fed501;
+    margin-top: 180px;
+    width: 100%;
+}
+.SearchItem {
+    width: 31% !important;
+    margin-left: 2%;
+    margin-top: 5px !important;
+    float: left;
+}
+.SearchItem > label {
+    line-height: 40px;
+    float: left;
+    width: 100%;
+    font-weight: bold;
+}
+.input[type="submit"] {
+    padding: 10px;
+    width: 100%;
+    font-family: "Arial", Arial, Helvetica, sans-serif;
+    font-size: 100%;
+}
+.SearchItem > input {
+    height: 40px;
+}
+
+#SearchingForm {
+  padding-right: 36px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#SearchingForm {
+  position: relative;
+  display: block;
+  padding-top: 5px;
+  color: #fff;
+  font: 14px/20px 'Open Sans', sans-serif;
+}
+
+#SearchingForm input,
+#SearchingForm textarea {
+  outline: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  border: 1px solid #f1f1f1;
+  color: #737272;
+  background: #f0f3f5;
+  padding: 5px 12px;
+  width: 100%;
+  font: 14px/20px 'Open Sans', sans-serif;
+  height: 40px;
+
+}
+
+#SearchingForm textarea {
+  resize: none;
+  padding-top: 10px !important;
+  color: #737272;
+  font: 14px/20px 'Open Sans', sans-serif;
+  height: 143px !important;
+   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+}
+
+#SearchingForm input::-webkit-input-placeholder {
+  color: #737272;
+}
+
+#SearchingForm input:focus,
+#SearchingForm textarea:focus {
+  background: #fff;
+}
+
+#SearchingForm a.btn {
+}
+#SearchingForm a.btn:hover {
+}

@@ -1,0 +1,5 @@
+Dạ thưa cô, đây là tài khoản và mật khẩu của admin, nhân viên và khách hàng ạ
+- tk: admin
+- mk: 123
+
+- Các tài khoản khác có mật khẩu và tài khoản giống nhau ạ.

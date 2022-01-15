@@ -149,12 +149,12 @@ https://templatemo.com/tm-529-ramayana
                         </div>
                         <div class="col-md-12">
                           <fieldset>
-                            <input type="time" name="tgxb" class="form-control" placeholder="Xuất bến" value="{{lt_t.0.TGXuatBen}}" required="">
+                            <input type="time" id="tgxb" name="tgxb" class="form-control" placeholder="Xuất bến" value="{{lt_t.0.TGXuatBen}}" required="">
                           </fieldset>
                         </div>
                         <div class="col-md-12">
                           <fieldset>
-                            <input type="time" name="tgdb" class="form-control" placeholder="Đến bến" value="{{lt_t.0.TGDenBen}}" required="">
+                            <input type="time" id="tgdb" name="tgdb" class="form-control" placeholder="Đến bến" value="{{lt_t.0.TGDenBen}}" required="">
                           </fieldset>
                         </div>
                         <div class="col-md-12">
@@ -164,7 +164,7 @@ https://templatemo.com/tm-529-ramayana
                         </div>
                         <div class="col-md-12">
 <!--                          <button {% if lt_t.0|mongo_id != None %} formaction="../../route/{{lt_t.0|mongo_id}}/update" type="submit"{% elif lt_t.0|mongo_id == None %} formaction="../../route" type="button" {% endif %} id="" class="button">Thêm</button>-->
-                            <button formaction="../../route/{{mlt}}/update" type="submit">Cập nhật</button>
+                            <button formaction="../../route/{{mlt}}/update" id="capnhat" type="submit">Cập nhật</button>
                         </div>
                         <div class="col-md-12" style="padding-top: 10px;"><a style="color: {{color}};">{{m}}</a></div>
                       </div>
@@ -340,9 +340,22 @@ https://templatemo.com/tm-529-ramayana
 
     }
     </script>
+<script>
+  $("#capnhat").click(function (){
+    var tgdb = $("#tgdb").val();
+    tgdb = 'March 13, 08 '+tgdb;
+    var tgxb = $("#tgxb").val();
+    tgxb = 'March 13, 08 '+tgxb;
+    var db = new Date(tgdb);
+    var xb = new Date(tgxb);
+    var time = db.getHours() - xb.getHours();
+    if (time < 1) {
+       alert('Thời gian xuất bến phải lớn hơn thời gian xuất bến ít nhất 1 giờ!');
+       $("#tgdb").val("");
+    }
+  });
+</script>
 </body>
 
-
-  </body>
 
 </html>

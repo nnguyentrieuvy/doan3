@@ -923,6 +923,7 @@ def demo(request):
 
 def ticket(request):
     if check_permission.check(request) == 3:
+        sove = 0
         DVX = connection.connect_db()
         lt = DVX['LoTrinh']
         dv = DVX['DatVe']

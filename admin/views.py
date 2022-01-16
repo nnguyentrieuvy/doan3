@@ -959,6 +959,7 @@ def ticket_search(request):
 
         dh = dv_ct.aggregate(pipeline3)
         dh = list(dh)
+        print('chay ticket_search')
         print('---dat ve---')
         print(dh)
         print('---dat ve---')

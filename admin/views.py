@@ -809,7 +809,7 @@ def route_upd(request, mt):
         return redirect('../admin')
 
 
-def search(request):
+def nvsv_search(request):
     if check_permission.check(request) == 2:
         DVX = connection.connect_db()
         lt = DVX['LoTrinh']

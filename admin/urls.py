@@ -24,7 +24,7 @@ urlpatterns = [
     path('route/information', views.route_information),
     path('route/<str:mt>', views.route_chitiet),
     path('bus_routes', views.bus_route),
-    path('bus_route/search', views.search),
+    path('bus_routes/search', views.nvsv_search),
     path('bus_route/<str:mt>', views.bus_route_chitiet),
     path('route/<str:mt>/update', views.route_upd),
     path('route/<str:mt>/information', views.route_inf),

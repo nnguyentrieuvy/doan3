@@ -559,12 +559,16 @@ def update_cart(request):
         print('-----cart v0------')
         for k in request.session['cs_cart']:
             if k['tk'] == request.session['tk']:
-                for i in k['cart']:
-                    if mlt == str(i['MaLT']):
-                        if int(sl) != 0:
-                            i['SL'] = int(sl)
-                        else:
-                            k['cart'].remove(k)
+                for i in range(len(k['cart'])):
+                    try:
+                        if mlt == str(k['cart'][i]['MaLT']):
+                            if int(sl) != 0:
+                                k['cart'][i] = int(sl)
+                            else:
+                                print('chay update_cart')
+                                del k['cart'][i]
+                    except IndexError:
+                        break
 
         print('-----cart v1------')
         print(request.session['cs_cart'])

@@ -361,10 +361,11 @@
               var gia = tr1.find('.gia').text();
               var vecosan = tr.find('.vecosan').text();
               vecosan = parseInt(vecosan, 10);
-              if (sl == 0) {
-                 $td.remove();
-              }
-              else if (sl <= vecosan) {
+              if (sl <= vecosan) {
+                 if (sl == 0)
+                {
+                    $td.remove();
+                }
                  if ($checkbox.is(':checked'))
                {
                  var tongtien = 0;

@@ -32,6 +32,7 @@ urlpatterns = [
     path('ticket/cancel', views.cancel),
     path('ticket/search', views.ticket_search),
     path('checkMTD', views.checkMTD),
+    path('checkMT', views.checkMT),
     path('nvtd/bus', views.bus),
     path('nvtd/bus_add', views.bus_add),
     path('nvtd/bus_update', views.bus_update),

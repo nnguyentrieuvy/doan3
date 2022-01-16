@@ -1150,3 +1150,18 @@ def checkMTD(request):
             kq = 0
         return JsonResponse({'kq': kq}, status=200)
     return JsonResponse({}, status=400)
+
+@csrf_exempt
+def checkMT(request):
+    if request.is_ajax and request.method == "POST":
+        mt = request.POST.get('mt')
+        DVX = connection.connect_db()
+        td = DVX['Tuyen']
+        rlt = td.find({'_id': mt}).count()
+        print(str(rlt))
+        if rlt > 0:
+            kq = 1
+        else:
+            kq = 0
+        return JsonResponse({'kq': kq}, status=200)
+    return JsonResponse({}, status=400)

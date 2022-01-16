@@ -93,7 +93,7 @@ https://templatemo.com/tm-529-ramayana
                       <div class="row">
                         <div class="col-md-9">
                           <fieldset id = 'input_mt'>
-                            <input type="text" name="mt" class="form-control" placeholder="Mã tuyến (Trạm đầu - Trạm cuối)" required="">
+                            <input type="text" name="mt" id = "mt" class="form-control" placeholder="Mã tuyến (Trạm đầu - Trạm cuối)" required="">
                           </fieldset>
                         </div>
                         <div class="col-md-3">
@@ -135,7 +135,7 @@ https://templatemo.com/tm-529-ramayana
                           </fieldset>
                         </div>
                         <div class="col-md-12">
-                          <button formaction="../../route/selected/add" type="submit"  class="button">Thêm11</button>
+                          <button formaction="../../route/selected/add" type="submit"  class="button">Thêm</button>
                         </div>
                         <div class="col-md-12" style="padding-top: 10px;"><a style="color: {{color}};">{{m}}</a></div>
                       </div>
@@ -305,8 +305,27 @@ https://templatemo.com/tm-529-ramayana
       }
     }
     </script>
-</body>
-
+    <script>
+      $("#mt").change(function (){
+         var mt = $(this).val();
+         $.ajax({
+               type: 'POST',
+               url: "../../checkMT",
+               data: {
+                  'mt': mt
+               },
+               success: function (response) {
+               if (response["kq"] == 1){
+                    $("#mt").val("");
+                    alert('Mã tuyến đã tồn tại!');
+               }
+               },
+               error: function (response) {
+                  console.log(response)
+               }
+        });
+      });
+    </script>
 
   </body>
 

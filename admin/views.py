@@ -528,7 +528,7 @@ def route_sel_add(request):
                 except MultiValueDictKeyError:
                     check = False
                     # tuyen xe phai co tram cuoi
-                    return redirect('../../bus_route')
+                    return redirect('../../bus_routes')
             if check == True and sel > 1:
                 try:
                     tx.insert_one(query_tx)
@@ -544,12 +544,12 @@ def route_sel_add(request):
                             query_t_tr = {"MaTuyen": matuyen, "MaTram": matram, "tt": tt}
                             tuyen_tram.insert_one(query_t_tr)
                         else:
-                            return redirect('../../bus_route')
+                            return redirect('../../bus_routes')
                 except DuplicateKeyError:
-                    return redirect('../../bus_route')
+                    return redirect('../../bus_routes')
             else:
                 # cac tuyen duong phai duoc chon
-                return redirect('../../bus_route')
+                return redirect('../../bus_routes')
 
         return render(request, 'NVTD/tx_chonma.html', {'ds_duong': ds_duong})
     else:

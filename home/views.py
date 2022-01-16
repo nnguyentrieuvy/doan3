@@ -563,7 +563,7 @@ def update_cart(request):
                     try:
                         if mlt == str(k['cart'][i]['MaLT']):
                             if int(sl) != 0:
-                                k['cart'][i] = int(sl)
+                                k['cart'][i]['SL'] = int(sl)
                             else:
                                 print('chay update_cart')
                                 del k['cart'][i]

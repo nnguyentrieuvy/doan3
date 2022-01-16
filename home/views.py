@@ -1114,6 +1114,11 @@ def ticket_cancel(request):
 #         sl_ve = sum(i['SL'] for i in request.session['cs_cart'])
 #         return render(request, 'KH/thanhtoan.html', {'data': request.session['cs_thanhtoan'], 'tongtien': tongtien, 'sove': sl_ve})
 
+
+
+def hddv(request):
+    return render(request, 'Home/hddv.html')
+
 @csrf_exempt
 def checkTK(request):
     if request.is_ajax and request.method == "POST":

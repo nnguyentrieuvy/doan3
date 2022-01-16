@@ -29,5 +29,6 @@ urlpatterns = [
     path('customer/ticket_cancel', views.ticket_cancel),
     path('Home/index', views.dangky),
     path('checkTK', views.checkTK),
+    path('book_ticket', views.hddv)
 
 ]

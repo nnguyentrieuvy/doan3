@@ -1136,6 +1136,8 @@ def bus_infor(request):
         check_permission.del_session(request)
         return redirect('../admin')
 
+
+
 @csrf_exempt
 def checkMTD(request):
     if request.is_ajax and request.method == "POST":

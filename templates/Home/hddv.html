@@ -1,0 +1,324 @@
+{% load static %}
+{% load filter %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- mobile metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<!-- site metas -->
+<title>Hướng dẫn đặt vé</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- bootstrap css -->
+<link rel="stylesheet" type="text/css" href="{% static 'uloax/css/bootstrap.min.css' %}">
+<!-- style css -->
+<link rel="stylesheet" type="text/css" href="{% static 'uloax/css/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'uloax/css/style1.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'uloax/css/searching.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'uloax/css/lichtrinh.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'uloax/css/benxe.css' %}">
+<!-- Fontawesome -->
+<link rel="stylesheet" href="{% static 'uloax/css/fontawesome-all.min.css' %}">
+<!-- Responsive-->
+<link rel="stylesheet" href="{% static 'uloax/css/responsive.css' %}">
+<!-- fevicon -->
+<link rel="icon" href="{% static 'uloax/images/fevicon.png' %}" type="image/gif" />
+<!-- Scrollbar Custom CSS -->
+<link rel="stylesheet" href="{% static 'uloax/css/jquery.mCustomScrollbar.min.css' %}">
+<!-- Tweaks for older IEs-->
+<!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">-->
+<!-- owl stylesheets --> 
+<link rel="stylesheet" href="{% static 'uloax/css/owl.carousel.min.css' %}">
+<!--<link rel="stylesheet" href="{% static 'uloax/css/owl.theme.default.min.css' %}">-->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">-->
+
+</head>
+<body>
+	<!--header section start -->
+    <div id="index.html" class="header_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="logo"><a style="font-size: 30px;" href="../../../"><img style="width: 30%;" src="{% static 'uloax/images/bus-icon.png' %}"><b style="font-family: Helvetica; color: #fff"> BUS </b></a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-9">
+                    <div class="menu_text">
+                        <ul>
+                            <li><a href="../../../">Trang chủ</a></li>
+                            <li><a href="../../../bus_route">Lịch trình</a></li>
+                            <li><a href="../../../bus_stop">Bến xe</a></li>
+                            <li><a class="current" href="#">Hướng dẫn đặt vé</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="../../../customer/cart"><img style="width: 23px; height: 23px;" src="{% static 'uloax/images/cart-icon.png' %}"></a></li>
+                            <form>
+                            <div class="dn_dk btn-group position-absolute top-0 end-0" style="padding-top: 10px;" role="group" aria-label="Basic example">
+                                         <button type="submit" formaction="../../../login" class="btn btn-outline-warning">Đăng nhập</button>
+                                         <button type="submit" formaction="../../../registration" class="btn btn-outline-warning">Đăng ký</button>
+                            </div>
+                            </form>
+                            <div id="myNav" class="overlay">
+                               <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                <div class="overlay-content">
+                                   <div class="TK">
+                                      <a id="showHome" style="color: #fff" onclick="showHome()" >
+                                         <i style="padding-right: 10px;" href="#" class="fa fa-home"></i>Trang chủ
+                                      </a>
+                                      <div>
+                                        <ul aria-labelledby="dropdownMenuButton1">
+                                            <li class="showH"><a href="../../../bus_route">Lịch trình</a></li>
+                                            <li class="showH"><a href="#">Bến xe</a></li>
+                                            <li class="showH"><a href="../../customer/cart">Giỏ hàng</a></li>
+                                            <li class="showH"><a href="#">Hướng dẫn đặt vé</a></li>
+                                            <li class="showH" style="padding-bottom: 20px; border-bottom: 1px solid;"><a href="#">Liên hệ</a></li>
+                                        </ul>
+                                      </div>
+                                       <a href="../../../registration" style="color: #fff">
+                                         <i style="padding-right: 10px;" class="fa fa-edit"></i> Đăng ký
+                                       </a>
+                                       <a href="../../../login" style="color: #fff">
+                                         <i style="padding-right: 10px;" class="fa fa-user"></i> Đăng nhập
+                                       </a>
+                                   </div>
+                               </div>
+                            </div>
+                            <span  style="font-size:33px;cursor:pointer; color: #ffffff;" onclick="openNav()"><img style="width: 20px;" src="{% static 'uloax/images/toggle-menu.png' %}" class="toggle_menu"></span>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header section end -->
+    <!-- search section start -->
+    <div class="search">
+      <div class="container">
+          <form id="SearchingForm" method="get">
+              <div class="SearchItem">
+                  <label>Bến xuất phát</label>
+                  <input type="text" name="bxp" placeholder= 'Bến xe Cần Thơ' style="width:100%; float:left; line-height:40px; font-size:14px; text-align:center;"/>
+              </div>
+              <div class="SearchItem">
+                  <label>Bến đến</label>
+                  <input type="text" name="bd" placeholder= 'Bến xe Ô Môn' style="width:100%; float:left; line-height:40px; font-size:14px; text-align:center;"/>
+              </div>
+              <div class="SearchItem">
+                  <label>&nbsp;</label>
+                  <input type="submit" formaction="../../../bus_route/search" value="TÌM CHUYẾN">
+              </div>
+          </form>
+      </div>
+    </div>
+    <!-- search section end -->
+
+    <!-- breadcrumb start -->
+    <div class="container">
+        <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="#">
+                    <i style="color: blue;" class="feather icon-home"></i>
+                </a>
+            </li>
+            <li class="breadcrumb-item active">
+                Hướng dẫn đặt vé
+            </li>
+        </ol>
+    </nav>
+    </div>
+    <!-- breadcrumb start -->
+
+    <!-- content start -->
+    <div class="content" style="padding: 20px;">
+        <div class="container">
+            <h3>Các bước đặt vé xe</h3>
+            <br>
+            <h4><b>Bước 1: Tìm kiếm chuyến xe</b></h4><br>
+            <h5>Quý khách có thể tìm chuyến xe theo nhu cầu thông qua các cách như sau:</h5>
+            <br><br>
+            <h5><b>- Lịch trình:</b></h5>
+            <p style="font-size: 17px;">
+                Chọn các lịch trình phù hợp theo nhu cầu của quý khách trong mục <b>Lịch trình</b>, sau đó thêm vào giỏ hàng (quý khách vui lòng đăng nhập để thực hiện thao tác này)
+                <br><br>
+                <img src="{% static 'uloax/images/h2.png' %}">
+                <br><br><br>
+                Hoặc sử dụng chức năng tìm kiếm của website để tiến hành tìm kiếm
+                <br><br>
+                <h5><b>- Tìm kiếm:</b></h5>
+                <img src="{% static 'uloax/images/h3.png' %}">
+                <br><br><br>
+                Quý khách có thể tìm kiếm theo <b>Bến xuất phát</b> hoặc <b>Bến đến</b> hoặc cả hai để tiến hành tìm kiếm, giao diện sau khi tìm kiếm
+                hiển thị như sau:
+                <br>
+                <i>Ví dụ: Tìm bến xuất phát là Nguyễn Trãi</i>
+                <br><br>
+                <img src="{% static 'uloax/images/h4.png' %}">
+                <br><br>
+                <img src="{% static 'uloax/images/h5.png' %}">
+                <br><br>
+                <h5><b>- Bến xe:</b></h5>
+                <br><br>
+                Sử dụng <b>Bến xe</b> để tìm theo điểm đến:
+                <br><br>
+                <img src="{% static 'uloax/images/h6.png' %}">
+                <br><br>
+                Tiếp theo chọn điểm xuất phát:
+                <br>
+                <i>Ví dụ: Trước đó chọn điểm đến là Lê Hồng Phong, website sẽ hiển thị các điểm xuất phát
+                     của các tuyến xe có điểm đến là Lê Hồng Phong</i>
+                <br><br>
+                <img src="{% static 'uloax/images/h7.png' %}">
+                <br><br>
+                Chọn điểm xuất phát để xem các lộ trình trên tuyến xe đó
+                <br><br>
+                <img src="{% static 'uloax/images/h8.png' %}">
+                <br><br>
+                Chọn lộ trình theo yêu cầu và thêm vào giỏ hàng (quý khách vui lòng đăng nhập để thực hiện thao tác này)
+                <br><br>
+                <img src="{% static 'uloax/images/h9.png' %}">
+
+            </p>
+            <br>
+            <h4><b>Bước 2: Chọn vé thanh toán</b></h4><br>
+            <h5>Quý khách chọn các vé vá số lượng trong giỏ hàng cần thanh toán như sau:</h5>
+            <p style="font-size: 17px;">
+                <img src="{% static 'uloax/images/h10.png' %}">
+            </p>
+            <br>
+            <h4><b>Bước 3: Đặt vé</b></h4><br>
+            <h5>Nhấn nút thanh toán để qua giao diện <b>Thanh toán</b></h5>
+            <p style="font-size: 17px;">
+                <img src="{% static 'uloax/images/h11.png' %}">
+                <br><br>
+                Sau khi cung cấp đầy đủ các thông tin, tiến hành thanh toán:
+                <br><br>
+                <img src="{% static 'uloax/images/h12.png' %}">
+                <br><br>
+            </p>
+            <h5>Quý khách vào mục <b>Xem lại vé</b> để xem các vé đã đặt</h5>
+            <br><br>
+            <img src="{% static 'uloax/images/h13.png' %}">
+        </div>
+        </div>
+    </div>
+    <!-- content end -->
+  <!-- section footer start -->
+    <div class="section_footer ">
+      <div class="container"> 
+          <div class="footer_section_2">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                  <h2 class="account_text">Địa chỉ</h2>
+                  <p class="ipsum_text">Tòa nhà số 01ABC, Nguyễn Trãi, TP Cần Thơ</p>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                  <h2 class="account_text">Liên kết</h2>
+                  <div class="image-icon"><img src="{% static 'uloax/images/bulit-icon.png' %}"><span class="fb_text"><a href="#">Trang chủ</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/bulit-icon.png' %}"><span class="fb_text"><a href="#">Lịch trình</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/bulit-icon.png' %}"><span class="fb_text"><a href="#">Bến xe</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/bulit-icon.png' %}"><span class="fb_text"><a href="#">Hướng dẫn đặt vé</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/bulit-icon.png' %}"><span class="fb_text"><a href="#">Liên hệ</a></span></div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                <h2 class="account_text">Liên hệ</h2>
+                <div class="image-icon"><img src="{% static 'uloax/images/fb-icon.png' %}"><span class="fb_text"><a href="#">Facebook</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/twitter-icon.png' %}"><span class="fb_text"><a href="#">Twitter</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/in-icon.png' %}"><span class="fb_text"><a href="#">Linkedin</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/youtube-icon.png' %}"><span class="fb_text"><a href="#">Youtube</a></span></div>
+                <div class="image-icon"><img src="{% static 'uloax/images/instagram-icon.png' %}"><span class="fb_text"><a href="#">Instagram</a></span></div>
+                </div>
+          <div class="col-sm-6 col-md-6 col-lg-3">
+            <h2 class="adderess_text">Newsletter</h2>
+            <input type="" class="email_text" placeholder="Enter Your Email" name="Enter Your Email">
+            <button class="subscribr_bt">SUBSCRIBE</button>
+          </div>
+          </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  <!-- section footer end -->
+  <!-- copyright section start -->
+  <div class="copyright_section">
+    <div class="container">
+      <p class="copyright">2019 All Rights Reserved. <a href="https://html.design">Free html  Templates</a></p>
+    </div>
+  </div>
+
+    <!-- Javascript files-->
+    <script src="{% static 'uloax/js/jquery.min.js' %}"></script>
+    <script src="{% static 'uloax/js/popper.min.js' %}"></script>
+    <script src="{% static 'uloax/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'uloax/js/jquery-3.0.0.min.js' %}"></script>
+    <script src="{% static 'uloax/js/plugin.js' %}"></script>
+    <!-- sidebar -->
+    <script src="{% static 'uloax/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'uloax/js/custom.js' %}"></script>
+    <!-- javascript --> 
+<!--    <script src="{% static 'uloax/js/owl.carousel.js' %}"></script>-->
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    $(".fancybox").fancybox({
+    openEffect: "none",
+    closeEffect: "none"
+    });
+       
+    $(".zoom").hover(function(){
+         
+    $(this).addClass('transition');
+    }, function(){
+         
+    $(this).removeClass('transition');
+    });
+    });
+    </script> 
+    <script>
+    function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+    }
+
+    function closeNav() {
+   document.getElementById("myNav").style.width = "0%";
+   }
+   function showKH() {
+        x = document.querySelectorAll(".showKH");
+        ul = document.getElementById("showKH");
+        var ds = x[0].style.display;
+        if (ds == "none") {
+           ul.classList.add("open");
+           for (i = 0; i < x.length; i++) {
+           x[i].style.display = "block";
+            }
+        } else {
+           ul.classList.remove("open");
+           for (i = 0; i < x.length; i++) {
+           x[i].style.display = "none";
+            }
+        }
+   }
+   function showHome() {
+        x = document.querySelectorAll(".showH");
+        ul = document.getElementById("showHome");
+        var ds = x[0].style.display;
+        if (ds == "none") {
+           ul.classList.add("open");
+           for (i = 0; i < x.length; i++) {
+           x[i].style.display = "block";
+            }
+        } else {
+           ul.classList.remove("open");
+           for (i = 0; i < x.length; i++) {
+           x[i].style.display = "none";
+            }
+        }
+   }
+</script>   
+</body>
+</html>

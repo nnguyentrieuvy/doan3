@@ -110,6 +110,7 @@ def lichtrinh(request):
     return render(request, 'Home/lichtrinh.html', {'data': lt_ttr})
 
 def search(request):
+    sl_ve = 0
     if request.method == 'GET':
         bxp = request.GET['bxp']
         bd = request.GET['bd']
@@ -159,17 +160,18 @@ def search(request):
         ])
         lt_ttr = list(lt_ttr)
         print(lt_ttr)
-    if check_permission.check(request) == 3:
-        for i in request.session['cs_cart']:
-            if i['tk'] == request.session['tk']:
-                sl_ve = sum(a['SL'] for a in i['cart'])
-                break
-            else:
-                sl_ve = 0
-        print('soveeee'+str(sl_ve))
-        return render(request, 'KH/lichtrinh.html', {'data': lt_ttr, 'sove': sl_ve, 'tk': request.session['tk']})
+        if check_permission.check(request) == 3:
+            for i in request.session['cs_cart']:
+                if i['tk'] == request.session['tk']:
+                    sl_ve = sum(a['SL'] for a in i['cart'])
+                    break
+                else:
+                    sl_ve = 0
+            print('soveeee' + str(sl_ve))
+            return render(request, 'KH/lichtrinh.html', {'data': lt_ttr, 'sove': sl_ve, 'tk': request.session['tk']})
     else:
-        return render(request, 'Home/lichtrinh.html', {'data': lt_ttr})
+        # ~~~~~~
+        return redirect('../../../bus_route')
 
 def ltr(request, dd, xp, mt):
     DVX = connection.connect_db()
